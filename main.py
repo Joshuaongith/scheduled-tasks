@@ -3,9 +3,12 @@ import smtplib
 import pandas
 import datetime as dt
 import random
+import os
 
-my_email = "joshuaonudemy@gmail.com"
-my_password = "xclv ilqp stis ewod"
+
+MY_EMAIL = os.environ.get("MY_EMAIL")
+MY_PASSWORD = os.environ.get("MY_PASSWORD")
+
 templates = [
         "letter_templates/letter_1.txt",
         "letter_templates/letter_2.txt",
@@ -45,8 +48,8 @@ if birthday_check_tuple in birthdays:
 
     with smtplib.SMTP("smtp.gmail.com",587) as connection:
         connection.starttls()
-        connection.login(my_email,my_password)
-        connection.sendmail(from_addr=my_email,to_addrs=birthday_person["email"], msg=f"Subject:Happy Birthday\n\n {final_email_text} ")
+        connection.login(MY_EMAIL, MY_PASSWORD)
+        connection.sendmail(from_addr=MY_EMAIL,to_addrs=birthday_person["email"], msg=f"Subject:Happy Birthday\n\n {final_email_text} ")
 
 
 
